@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Camilo Guerra — autos, Fórmula 1, spotting y contenido automotriz.">
+  <title>Camilo Guerra — Autos, F1 y spotting</title>
+  <style>
+    :root { color-scheme: dark; --bg:#08090b; --panel:rgba(20,22,27,.8); --line:rgba(255,255,255,.11); --text:#f7f7f7; --muted:#a9adb8; --accent:#ff3d48; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); scroll-behavior:smooth; }
+    body { min-height:100vh; margin:0; overflow-x:hidden; background:radial-gradient(circle at 16% 0%,rgba(255,61,72,.17),transparent 29rem),radial-gradient(circle at 95% 10%,rgba(43,93,255,.15),transparent 29rem),var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.42; background:linear-gradient(115deg,transparent 0 47%,rgba(255,255,255,.025) 50%,transparent 53%); }
+    main { width:min(720px,calc(100% - 32px)); margin:0 auto; padding:36px 0 48px; }
+    .hero { position:relative; overflow:hidden; min-height:312px; border:1px solid var(--line); border-radius:28px; background:#111; isolation:isolate; }
+    .hero video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.62; filter:saturate(.8) contrast(1.05); z-index:-2; }
+    .hero::after { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(7,8,10,.18),rgba(7,8,10,.84) 84%); }
+    .profile { position:absolute; left:28px; right:28px; bottom:26px; display:flex; align-items:flex-end; justify-content:space-between; gap:18px; }
+    .identity { display:flex; align-items:flex-end; gap:15px; }
+    .avatar { width:76px; height:76px; border:3px solid rgba(255,255,255,.9); border-radius:50%; object-fit:cover; background:#25272c; box-shadow:0 12px 35px rgba(0,0,0,.35); }
+    h1 { margin:0; font-size:clamp(27px,6vw,38px); letter-spacing:-.055em; line-height:.96; }
+    .tag { display:block; margin-top:7px; color:#d6d8de; font-size:14px; font-weight:650; }
+    .live { display:inline-flex; align-items:center; gap:7px; margin-bottom:2px; white-space:nowrap; border:1px solid rgba(255,255,255,.18); border-radius:999px; background:rgba(12,13,16,.64); padding:9px 12px; font-size:12px; font-weight:750; backdrop-filter:blur(10px); }
+    .live::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 5px rgba(255,61,72,.16); animation:pulse 1.75s ease-in-out infinite; }
+    .intro { margin:16px 0; padding:17px 18px; border:1px solid var(--line); border-radius:20px; background:var(--panel); color:#e4e5e9; font-size:15px; line-height:1.42; backdrop-filter:blur(14px); }
+    .section-title { display:flex; align-items:center; justify-content:space-between; margin:27px 2px 11px; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .links { display:grid; gap:10px; }
+    .link-card { position:relative; display:flex; align-items:center; gap:14px; min-height:68px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:var(--panel); color:var(--text); padding:12px 16px; text-decoration:none; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+    .link-card:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.28); background:rgba(33,36,43,.9); }
+    .link-card:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+    .icon { display:grid; flex:0 0 40px; width:40px; height:40px; place-items:center; border-radius:13px; background:#171a21; font-size:21px; }
+    .tiktok .icon { background:linear-gradient(135deg,#00f2ea,#111 42%,#ff0050); }
+    .youtube .icon { background:#e52d35; }
+    .instagram .icon { background:radial-gradient(circle at 30% 105%,#ffd871 0 14%,#ff7a00 25%,#d62976 48%,#962fbf 73%,#4f5bd5); }
+    .card-copy { min-width:0; flex:1; } .card-copy b,.card-copy span { display:block; } .card-copy b { font-size:15px; } .card-copy span { overflow:hidden; margin-top:3px; color:var(--muted); font-size:12px; text-overflow:ellipsis; white-space:nowrap; }
+    .arrow { color:#cdd0d8; font-size:23px; transition:transform .2s ease; } .link-card:hover .arrow { transform:translate(2px,-2px); }
+    .media-grid { display:grid; grid-template-columns:1.25fr .75fr; grid-auto-rows:128px; gap:10px; }
+    .media { position:relative; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:#16181d; cursor:zoom-in; }
+    .media:first-child { grid-row:span 2; } .media video { width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s ease; } .media:hover video { transform:scale(1.06); }
+    .media::after { content:"Ver"; position:absolute; right:10px; bottom:10px; border-radius:999px; background:rgba(10,11,14,.67); padding:6px 9px; font-size:11px; font-weight:750; backdrop-filter:blur(8px); }
+    .contact { width:100%; border:1px solid var(--line); border-radius:20px; background:var(--panel); color:var(--text); cursor:pointer; padding:16px; text-align:left; transition:background .2s ease,transform .2s ease; } .contact:hover { transform:translateY(-2px); background:rgba(33,36,43,.9); } .contact strong,.contact small { display:block; } .contact small { margin-top:4px; color:var(--muted); }
+    footer { padding:28px 0 5px; color:#6f7480; font-size:12px; text-align:center; }
+    #lightbox { display:none; position:fixed; inset:0; z-index:50; align-items:center; justify-content:center; background:rgba(0,0,0,.86); padding:24px; } #lightbox.open { display:flex; } #lightbox video { max-width:100%; max-height:100%; border-radius:18px; box-shadow:0 24px 80px #000; } #lightbox button { position:fixed; right:20px; top:20px; border:1px solid var(--line); border-radius:50%; background:#17191e; color:white; cursor:pointer; width:42px; height:42px; font-size:25px; }
+    #toast { position:fixed; left:50%; bottom:24px; z-index:60; border:1px solid var(--line); border-radius:999px; background:#f4f4f4; color:#111; opacity:0; padding:11px 15px; font-size:13px; font-weight:750; pointer-events:none; transform:translate(-50%,16px); transition:.2s ease; } #toast.show { opacity:1; transform:translate(-50%,0); }
+    @keyframes pulse { 50% { transform:scale(.75); opacity:.55; } }
+    @media (max-width:560px) { main { width:min(100% - 20px,720px); padding-top:10px; } .hero { min-height:276px; border-radius:23px; } .profile { left:19px; right:19px; bottom:19px; } .identity { gap:11px; } .avatar { width:62px; height:62px; } .live { padding:8px; font-size:0; } .live::before { margin:1px; } .intro { margin:11px 0; } .media-grid { grid-auto-rows:104px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Perfil de Camilo Guerra">
+      <video autoplay muted loop playsinline preload="auto"><source src="assets/BYUSjGPNygB367uAYYOHJBfOmi8.mp4" type="video/mp4"></video>
+      <div class="profile"><div class="identity"><img class="avatar" src="assets/avatar.jpg" alt="Camilo Guerra"><div><h1>Camilo Guerra</h1><span class="tag">Autos · Fórmula 1 · Spotting</span></div></div><span class="live">Lives domingos</span></div>
+    </section>
+    <p class="intro">🏎️ Creador de contenido automotriz. Supercars, Fórmula 1, eventos y la búsqueda del próximo gran coche.</p>
+    <div class="section-title"><span>Encuéntrame</span><span>↗</span></div>
+    <nav class="links" aria-label="Enlaces de Camilo Guerra">
+      <a class="link-card tiktok" href="https://www.tiktok.com/@Camiloguerramm" target="_blank" rel="noopener noreferrer"><span class="icon">♪</span><span class="card-copy"><b>TikTok</b><span>Lives todos los domingos</span></span><span class="arrow">↗</span></a>
+      <a class="link-card instagram" href="https://www.instagram.com/Camiloguerramm" target="_blank" rel="noopener noreferrer"><span class="icon">◎</span><span class="card-copy"><b>Instagram</b><span>Autos, eventos y comunidad</span></span><span class="arrow">↗</span></a>
+      <a class="link-card youtube" href="https://www.youtube.com/@CGSCars" target="_blank" rel="noopener noreferrer"><span class="icon">▶</span><span class="card-copy"><b>Camilo Guerra Cars</b><span>Videos de autos y experiencias</span></span><span class="arrow">↗</span></a>
+      <a class="link-card youtube" href="https://youtube.com/@mexiparces?si=PeqA0f4Sy6DAw4e-" target="_blank" rel="noopener noreferrer"><span class="icon">▶</span><span class="card-copy"><b>Mexi Parces</b><span>Comunidad y contenido</span></span><span class="arrow">↗</span></a>
+    </nav>
+    <div class="section-title"><span>En movimiento</span><span>Haz clic para ver</span></div>
+    <section class="media-grid" aria-label="Videos de Camilo">
+      <button class="media" type="button" data-video="assets/sGIpubIW18ludyQqARLejrdmyGs.mp4" aria-label="Abrir video 1"><video autoplay muted loop playsinline preload="metadata"><source src="assets/sGIpubIW18ludyQqARLejrdmyGs.mp4" type="video/mp4"></video></button>
+      <button class="media" type="button" data-video="assets/PM6vKIZEgyfpRHY5psKrsBdt3g.mp4" aria-label="Abrir video 2"><video autoplay muted loop playsinline preload="metadata"><source src="assets/PM6vKIZEgyfpRHY5psKrsBdt3g.mp4" type="video/mp4"></video></button>
+      <button class="media" type="button" data-video="assets/WTEi5Qcgkdc4YmQr9zEKSZbBgw.mp4" aria-label="Abrir video 3"><video autoplay muted loop playsinline preload="metadata"><source src="assets/WTEi5Qcgkdc4YmQr9zEKSZbBgw.mp4" type="video/mp4"></video></button>
+    </section>
+    <div class="section-title"><span>Contacto</span></div>
+    <button class="contact" id="copy-email" type="button"><strong>camiloguerracars@gmail.com</strong><small>Colaboraciones y oportunidades · clic para copiar</small></button>
+    <footer>© <span id="year"></span> Camilo Guerra</footer>
+  </main>
+  <div id="lightbox" aria-hidden="true"><button type="button" aria-label="Cerrar">×</button><video controls autoplay muted loop playsinline></video></div>
+  <div id="toast" role="status">Correo copiado</div>
+  <script>
+    const lightbox=document.querySelector('#lightbox'), player=lightbox.querySelector('video'), close=()=>{player.pause();lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true')};
+    document.querySelectorAll('[data-video]').forEach(card=>card.addEventListener('click',()=>{player.src=card.dataset.video;lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');player.play().catch(()=>{})}));
+    lightbox.addEventListener('click',event=>{if(event.target===lightbox||event.target.tagName==='BUTTON')close()});document.addEventListener('keydown',event=>{if(event.key==='Escape')close()});
+    const email='camiloguerracars@gmail.com',toast=document.querySelector('#toast');document.querySelector('#copy-email').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(email)}catch{const input=document.createElement('textarea');input.value=email;document.body.append(input);input.select();document.execCommand('copy');input.remove()}toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)});
+    document.querySelector('#year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
