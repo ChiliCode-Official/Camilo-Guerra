@@ -16,13 +16,16 @@ document.querySelectorAll('.native-live-link').forEach(link=>{
 });
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const revealItems=[...document.querySelectorAll('[data-card]>div,.site-p4d587,.site-8w4xde,.site-luYlL')];
+if(!reduced){const revealObserver=new IntersectionObserver((entries,observer)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('smooth-reveal','is-visible');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});revealItems.forEach((item,index)=>{item.classList.add('smooth-reveal');item.style.transitionDelay=`${Math.min(index*45,360)}ms`;revealObserver.observe(item)})}else revealItems.forEach(item=>item.classList.add('is-visible'));
 const links=[['TikTok · lives todos los domingos','https://www.tiktok.com/@Camiloguerramm'],['Instagram','https://www.instagram.com/Camiloguerramm'],['Camilo Guerra Cars','https://www.youtube.com/@CGSCars'],['Mexi Parces','https://youtube.com/@mexiparces?si=PeqA0f4Sy6DAw4e-']];
+document.querySelector('[data-card="8"] a')?.setAttribute('href','https://www.youtube.com/@CamiloGuerraCars');
 const dialog=document.createElement('dialog');dialog.className='native-dialog';dialog.setAttribute('aria-label','Vista ampliada');document.body.append(dialog);
 let previousFocus;
 function close(){dialog.querySelectorAll('video').forEach(v=>v.pause());dialog.close();document.documentElement.style.overflow='';previousFocus?.focus()}
 function show(content){previousFocus=document.activeElement;dialog.replaceChildren(content);const button=document.createElement('button');button.className='close';button.textContent='×';button.setAttribute('aria-label','Cerrar');button.addEventListener('click',close);dialog.append(button);dialog.showModal();document.documentElement.style.overflow='hidden';button.focus()}
-dialog.addEventListener('click',close);
-dialog.addEventListener('pointerdown',close);
+dialog.addEventListener('click',e=>{if(e.target===dialog)close()});
+dialog.addEventListener('pointerdown',e=>{if(e.target===dialog)close()});
 dialog.addEventListener('cancel',e=>{e.preventDefault();close()});
 function preview(source){const media=source.cloneNode(true);media.removeAttribute('style');media.removeAttribute('class');media.removeAttribute('width');media.removeAttribute('height');media.addEventListener('click',e=>e.stopPropagation());if(media.tagName==='VIDEO'){media.controls=true;media.muted=true;media.autoplay=true}show(media);if(media.tagName==='VIDEO')media.play().catch(()=>{})}
 function keyboardClick(node){if(!node.matches('a,button')){node.tabIndex=0;node.setAttribute('role','button');node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();node.click()}})}}
@@ -45,7 +48,7 @@ document.querySelectorAll('[data-card] img').forEach(img=>{
  img.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();preview(img)});
 });
 const tick=()=>{const label=new Intl.DateTimeFormat('en-US',{weekday:'short',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:true}).format(new Date()).toUpperCase();document.querySelectorAll('[data-clock]>div').forEach(n=>n.textContent=label)};tick();setInterval(tick,30000);document.querySelectorAll('[data-year]').forEach(n=>n.textContent=new Date().getFullYear());
-const visibility=new IntersectionObserver(entries=>{entries.forEach(({target,isIntersecting})=>{if(isIntersecting&&!reduced){target.play().catch(()=>{})}else target.pause()})},{rootMargin:'100px'});document.querySelectorAll('video').forEach(v=>{v.muted=true;v.playsInline=true;visibility.observe(v)});
+// La reproducción de las tarjetas se administra en site-repairs.js.
 document.querySelectorAll('[data-globe]').forEach(canvas=>{
  let phi=0,last=performance.now(),visible=true,dragging=false,lastX=0;
  const observer=new IntersectionObserver(entries=>visible=entries[0].isIntersecting);observer.observe(canvas);
