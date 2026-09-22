@@ -1,5 +1,10 @@
 /* Original layout and typography are retained in index.html. */
 :root { color-scheme:dark; }
+@media(max-width:809px){
+  #main .site-19uivnr [data-card="4"]>div.site-o1iydx-container{height:240px!important;min-height:240px!important;width:100%!important;align-self:start!important}
+  #main .site-19uivnr [data-card="4"] .site-pFRjz{height:240px!important;min-height:240px!important;box-sizing:border-box;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
+  #main .site-19uivnr [data-card="4"] p{white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;max-width:100%!important}
+}
 @media(max-width:600px){
   html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   #main .site-19uivnr{width:100%;max-width:540px;box-sizing:border-box;padding-inline:12px;grid-auto-flow:row}
