@@ -553,8 +553,8 @@ localMedia(3,'img:not([src^="data:image/svg"])','assets/4.jpg');
 localMedia(6,'img:not([src^="data:image/svg"])','assets/5.jpg');
 localMedia(8,'video','assets/6.mp4');
 localMedia(9,'img','assets/1.jpg');
-document.querySelectorAll(' [data-card="10"] img:not([src^="data:image/svg"])').forEach(img=>{const v=document.createElement('video');v.muted=true;v.defaultMuted=true;v.loop=true;v.autoplay=true;v.preload='metadata';v.playsInline=true;v.setAttribute('autoplay','');v.setAttribute('loop','');v.setAttribute('playsinline','');v.setAttribute('muted','');v.className=img.className;v.style.cssText=img.style.cssText;img.replaceWith(v)});
-localMedia(10,'video','assets/WTEi5Qcgkdc4YmQr9zEKSZbBgw.mp4');
+document.querySelectorAll('[data-card="10"] video').forEach(video=>{video.pause();const img=document.createElement('img');img.className=video.className;img.style.cssText=video.style.cssText;video.replaceWith(img)});
+document.querySelectorAll('[data-card="10"] img:not([src^="data:image/svg"])').forEach(img=>{img.src='assets/mexiparces.jpg';img.removeAttribute('srcset');img.alt='Mexi Parces';img.decoding='async';img.style.objectFit='cover';img.style.objectPosition='center'});
 document.querySelectorAll('[data-card="7"] p').forEach(p=>{if(/Lives en TikTok|Domingos/.test(p.textContent))p.textContent='Revisa el sitio web oficial de nuestra comunidad';if(/Autos y comunidad/.test(p.textContent))p.textContent='Camilo Guerra Comunidad'});
 document.querySelectorAll('[data-card="7"] a').forEach(a=>{a.href='comunidad.html';a.target='_self';a.textContent='Visitar comunidad ↗'});
 </script>

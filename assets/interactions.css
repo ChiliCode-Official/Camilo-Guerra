@@ -1,5 +1,22 @@
 /* Original layout and typography are retained in index.html. */
 :root { color-scheme:dark; }
+@media(max-width:600px){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  #main .site-19uivnr{width:100%;max-width:540px;box-sizing:border-box;padding-inline:12px;grid-auto-flow:row}
+  #main .site-19uivnr [data-card]>div{min-width:0;max-width:100%;width:100%;justify-self:stretch}
+  #main .site-19uivnr [data-card="4"]>div{height:100%!important;min-height:200px!important;align-self:stretch!important}
+  #main [data-copy-email]>.site-pFRjz{box-sizing:border-box;min-height:200px!important;height:100%!important;width:100%!important;flex-shrink:0;padding:16px!important}
+  #main [data-copy-email] [data-site-component-type="RichTextContainer"]{max-width:100%;min-width:0}
+  #main [data-copy-email] p{overflow-wrap:anywhere;white-space:normal}
+  #main .site-19uivnr [data-card="8"]>div{order:80!important}
+  #main .site-19uivnr [data-card="10"]>div{order:81!important}
+  #main .site-19uivnr [data-card="9"]>div{order:82!important}
+}
+@media(max-width:480px){
+  #main .site-19uivnr [data-card]>div{grid-column:1 / -1!important;grid-row:auto!important}
+  #main .site-19uivnr{grid-auto-rows:minmax(220px,auto)!important}
+  #main .site-19uivnr [data-card="2"]>div{height:auto!important;aspect-ratio:1}
+}
 body{--token-49ada369-5771-4218-9648-dac4cb8bf0d4:#0c0c0c;--token-a1bbbd6e-47db-4a4a-9287-1fde5982623f:#171717;--token-a95b4afe-3104-4deb-93d5-5885d2a8dad1:#fff;--token-074f169b-431d-4b71-b00b-6a0c3858f090:#8c8c8c;--token-6ea8d15a-8b64-45c4-bf32-8596f2bd94c4:#737373;--token-b65f5d53-e190-4f98-b5bd-fc43c3415e90:#ffffff14;--token-e02eedda-7bfb-4b5f-8072-17cfaa65a67e:#171717;--token-723facf1-c979-4423-9ee8-800faa107699:#242424;--token-a5cd12d7-9d1b-4476-a994-d6797db2dabc:#292929;--token-5f652316-9447-4ac4-88ea-40ec8170ab01:#29292900;--token-77658f9c-9681-4a9b-b6ba-ab248a978c4a:#1f1f1f;--token-7eb546a4-6722-498d-9de4-0906f2d7ef22:#262626}
 .ssr-variant{display:contents!important}
 .site-uj7yY .site-19uivnr{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:200px;grid-template-rows:none;max-width:848px;gap:16px}
