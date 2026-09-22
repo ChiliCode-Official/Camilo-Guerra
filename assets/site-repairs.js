@@ -1,4 +1,28 @@
 (() => {
+  const directCards = {
+    '9': 'https://www.instagram.com/Camiloguerramm',
+    '10': 'https://youtube.com/@mexiparces?si=PeqA0f4Sy6DAw4e-'
+  };
+  Object.entries(directCards).forEach(([id, url]) => {
+    document.querySelectorAll(`[data-card="${id}"] a`).forEach(link => {
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
+  });
+  document.addEventListener('click', event => {
+    const card = event.target.closest('[data-card="9"], [data-card="10"]');
+    if (!card) return;
+    // Conserva la navegación nativa del enlace e impide los visores heredados.
+    event.stopImmediatePropagation();
+    if (!event.target.closest('a[href]')) {
+      event.preventDefault();
+      window.open(directCards[card.dataset.card], '_blank', 'noopener,noreferrer');
+    }
+  }, true);
+  const directCardStyle = document.createElement('style');
+  directCardStyle.textContent = '#main [data-card="9"],#main [data-card="10"],#main [data-card="9"] *,#main [data-card="10"] *{cursor:pointer!important}';
+  document.head.append(directCardStyle);
   // Un solo visor para las tarjetas de fotos; evita los dos manejadores heredados.
   const viewer = document.createElement('dialog');
   viewer.setAttribute('aria-label', 'Foto ampliada');

@@ -8,9 +8,15 @@
   #main [data-copy-email]>.site-pFRjz{box-sizing:border-box;min-height:200px!important;height:100%!important;width:100%!important;flex-shrink:0;padding:16px!important}
   #main [data-copy-email] [data-site-component-type="RichTextContainer"]{max-width:100%;min-width:0}
   #main [data-copy-email] p{overflow-wrap:anywhere;white-space:normal}
-  #main .site-19uivnr [data-card="8"]>div{order:80!important}
-  #main .site-19uivnr [data-card="10"]>div{order:81!important}
-  #main .site-19uivnr [data-card="9"]>div{order:82!important}
+  #main .site-19uivnr [data-card="2"]>div{order:2!important}
+  #main .site-19uivnr [data-card="8"]>div{order:3!important;grid-column:1 / -1!important;grid-row:auto!important}
+  #main .site-19uivnr [data-card="4"]>div{order:4!important}
+  #main .site-19uivnr [data-card="10"]>div{order:5!important}
+  #main .site-19uivnr [data-card="9"]>div{order:6!important}
+  #main .site-19uivnr [data-card="3"]>div{order:7!important}
+  #main .site-19uivnr [data-card="6"]>div{order:8!important}
+  #main .site-19uivnr [data-card="7"]>div{order:9!important}
+  #main .site-19uivnr [data-card="5"]>div{order:10!important}
 }
 @media(max-width:480px){
   #main .site-19uivnr [data-card]>div{grid-column:1 / -1!important;grid-row:auto!important}
