@@ -1,4 +1,26 @@
 (() => {
+  const phoneLayout = matchMedia('(max-width:809px)');
+  const mobileSequence = ['0', '1', '2', '8', '4', '10', '9', '3', '6', '7', '5'];
+  const layoutDefaults = new Map();
+  document.querySelectorAll('.site-19uivnr > [data-card]').forEach(card => {
+    [card, card.firstElementChild].filter(Boolean).forEach(node => {
+      layoutDefaults.set(node, ['order', 'grid-column', 'grid-row'].map(name => [name, node.style.getPropertyValue(name), node.style.getPropertyPriority(name)]));
+    });
+  });
+  const arrangePhoneCards = () => {
+    layoutDefaults.forEach((properties, node) => {
+      properties.forEach(([name, value, priority]) => { if (value) node.style.setProperty(name, value, priority); else node.style.removeProperty(name); });
+      if (!phoneLayout.matches) return;
+      const id = (node.matches('[data-card]') ? node : node.parentElement).dataset.card;
+      const rank = mobileSequence.indexOf(id);
+      if (rank < 0) return;
+      node.style.setProperty('order', String(rank), 'important');
+      node.style.setProperty('grid-row', 'auto', 'important');
+      if (id === '2' || id === '8') node.style.setProperty('grid-column', '1 / -1', 'important');
+    });
+  };
+  arrangePhoneCards();
+  phoneLayout.addEventListener('change', arrangePhoneCards);
   const directCards = {
     '9': 'https://www.instagram.com/Camiloguerramm',
     '10': 'https://youtube.com/@mexiparces?si=PeqA0f4Sy6DAw4e-'
