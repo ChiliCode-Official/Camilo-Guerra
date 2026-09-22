@@ -1,4 +1,48 @@
 (() => {
+  // Un solo visor para las tarjetas de fotos; evita los dos manejadores heredados.
+  const viewer = document.createElement('dialog');
+  viewer.setAttribute('aria-label', 'Foto ampliada');
+  viewer.style.cssText = 'position:fixed;inset:0;margin:auto;padding:16px;border:0;width:100vw;height:100dvh;max-width:100vw;max-height:100dvh;background:rgba(0,0,0,.9);box-sizing:border-box;overflow:hidden';
+  document.body.append(viewer);
+  let sourceFocus;
+  let closing = false;
+  const closeViewer = async () => {
+    if (!viewer.open || closing) return;
+    closing = true;
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      await viewer.animate([{opacity:1},{opacity:0}], {duration:160}).finished.catch(() => {});
+    }
+    viewer.close();
+    viewer.style.display = '';
+    sourceFocus?.focus({preventScroll:true});
+    closing = false;
+  };
+  viewer.addEventListener('click', event => { if (event.target === viewer) closeViewer(); });
+  viewer.addEventListener('cancel', event => { event.preventDefault(); closeViewer(); });
+  document.addEventListener('click', event => {
+    const card = event.target.closest('[data-card="2"], [data-card="3"], [data-card="6"]');
+    const source = card?.querySelector('img');
+    if (!source) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    sourceFocus = document.activeElement;
+    const photo = document.createElement('img');
+    photo.src = source.currentSrc || source.src;
+    photo.alt = source.alt;
+    photo.style.cssText = 'display:block;width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 80px);object-fit:contain;border-radius:18px;min-width:0;min-height:0';
+    const button = document.createElement('button');
+    button.textContent = '×';
+    button.setAttribute('aria-label', 'Cerrar foto');
+    button.style.cssText = 'position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;width:44px;height:44px;border:1px solid #777;border-radius:50%;background:#171717;color:white;font:28px Arial;cursor:pointer';
+    button.addEventListener('click', closeViewer);
+    viewer.replaceChildren(photo, button);
+    viewer.style.display = 'flex';
+    viewer.style.alignItems = 'center';
+    viewer.style.justifyContent = 'center';
+    viewer.showModal();
+    button.focus();
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) photo.animate([{opacity:0,transform:'scale(.96)'},{opacity:1,transform:'scale(1)'}],{duration:200});
+  }, true);
   const channel = 'https://www.youtube.com/@CamiloGuerraCars';
   document.querySelectorAll('a[href*="@CGSCars"], a[aria-label="Camilo Guerra Cars"], [data-card="8"] a').forEach(link => { link.href = channel; });
   document.querySelectorAll('[data-card="8"]').forEach(card => { card.dataset.destination = channel; });
