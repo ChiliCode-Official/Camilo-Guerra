@@ -53,7 +53,7 @@
     }
   });
   const phoneLayout = matchMedia('(max-width:809px)');
-  const mobileSequence = ['0', '1', '2', '8', '4', '9', '5', '6', '7', '3', '10'];
+  const mobileSequence = ['0', '1', '2', '8', '4', '9', '6', '5', '7', '3', '10'];
   const layoutDefaults = new Map();
   document.querySelectorAll('.site-19uivnr > [data-card]').forEach(card => {
     [card, card.firstElementChild].filter(Boolean).forEach(node => {
