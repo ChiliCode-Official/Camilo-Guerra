@@ -33,6 +33,27 @@
   const socialLabelStyle = document.createElement('style');
   socialLabelStyle.textContent = 'header a::after,.site-8w4xde a::after{content:none!important;display:none!important}header a[href]{position:relative!important;overflow:visible!important}header a[href] .native-social-label{position:absolute!important;top:calc(100% + 5px)!important;left:50%!important;transform:translateX(-50%)!important;font:500 10px/1 Inter,Arial,sans-serif!important;color:#8c8c8c!important;white-space:nowrap!important;pointer-events:none!important}';
   document.head.append(socialLabelStyle);
+  const youtubeIconStyle = document.createElement('style');
+  youtubeIconStyle.textContent = `
+    #main [data-card="8"] .site-vlfe5l>img,
+    #main [data-card="10"] .site-15kxvm0>img{display:none!important}
+    #main [data-card="10"] .site-15kxvm0::before{content:'▶';display:flex;align-items:center;justify-content:center;width:28px;height:20px;border-radius:6px;background:#ff0033;color:#fff;font:700 12px/1 Arial,sans-serif;position:absolute;z-index:3;top:14px;left:14px;box-shadow:0 2px 8px #0008}
+  `;
+  document.head.append(youtubeIconStyle);
+  const videoCardFixStyle = document.createElement('style');
+  videoCardFixStyle.textContent = `
+    #main [data-card="8"]>div>a{position:relative!important;overflow:hidden!important;display:block!important}
+    #main [data-card="8"]>div>a::before{content:'▶';display:flex;align-items:center;justify-content:center;width:30px;height:22px;border-radius:6px;background:#ff0033;color:#fff;font:700 13px/1 Arial,sans-serif;position:absolute;z-index:20;top:14px;left:14px;box-shadow:0 2px 8px #0008}
+    #main [data-card="8"] .site-vlfe5l{display:none!important}
+    #main [data-card="8"] .site-sdf25k{position:absolute!important;inset:16px 16px auto auto!important;width:calc(100% - 76px)!important;height:auto!important;padding:0!important;display:flex!important;flex-direction:column!important;gap:3px!important;align-items:flex-end!important;justify-content:flex-start!important;transform:none!important;z-index:2!important}
+    #main [data-card="8"] .site-sdf25k>div{width:100%!important;min-width:0!important;height:auto!important}
+    #main [data-card="8"] .site-sdf25k p{white-space:normal!important;text-align:right!important;line-height:1.3!important;margin:0!important}
+    #main [data-card="8"] .site-1j083h8{position:absolute!important;inset:auto auto 0 0!important;width:62%!important;height:62%!important;min-height:0!important;max-width:none!important;transform:none!important;border-radius:6px 6px 0 0!important;overflow:hidden!important}
+    #main [data-card="8"] .site-1wt9xpr-container{position:relative!important;inset:auto!important;width:100%!important;height:100%!important;min-height:0!important}
+    #main [data-card="8"] video{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
+    @media(max-width:809px){#main .site-19uivnr>[data-card="8"]{height:230px!important;min-height:230px!important;overflow:hidden!important}#main [data-card="8"] .site-sdf25k p{font-size:14px!important}}
+  `;
+  document.head.append(videoCardFixStyle);
   document.querySelectorAll('header a[href]').forEach(link => {
     const found = socialLabels.find(([key]) => link.href.includes(key));
     if (!found || link.querySelector('.native-social-label')) return;
