@@ -145,6 +145,7 @@
       #main .site-19uivnr>[data-card="4"] .email-purpose{text-align:center!important;margin-inline:auto!important}
       #main .site-19uivnr>[data-card="0"]>div>div,
       #main .site-19uivnr>[data-card="5"]>div>a{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+      #main .site-19uivnr>[data-card="5"]>div>a{justify-content:flex-end!important;padding:16px!important;padding-top:54px!important}
       #main .site-19uivnr>[data-card="0"] p,
       #main .site-19uivnr>[data-card="5"] p{text-align:center!important;margin-inline:auto!important}
       #main .site-19uivnr>[data-card="8"]{height:220px!important;min-height:220px!important}
