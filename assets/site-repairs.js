@@ -81,10 +81,10 @@
     }
   });
   const phoneLayout = matchMedia('(max-width:809px)');
-  const mobileSequence = ['0', '1', '5', '8', '9', '4', '7', '2', '3', '6', '11', '10'];
+  const mobileSequence = ['0', '1', '5', '8', '9', '4', '7', '2', '3', '6', 'gallery-video', '10'];
   const mobileMedia = [];
   const grid = document.querySelector('#main .site-19uivnr');
-  [['8', 'video', '11']].forEach(([id, selector, mediaId]) => {
+  [['8', 'video', 'gallery-video']].forEach(([id, selector, mediaId]) => {
     const media = grid?.querySelector(`[data-card="${id}"] ${selector}`);
     if (!media) return;
     const placeholder = document.createComment('Original media position');
@@ -110,7 +110,7 @@
       #main .site-19uivnr>[data-card="3"],
       #main .site-19uivnr>[data-card="6"],
       #main .site-19uivnr>[data-card="10"],
-      #main .site-19uivnr>[data-card="11"]{position:relative!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;aspect-ratio:1!important;overflow:hidden!important;border-radius:24px;box-sizing:border-box!important}
+      #main .site-19uivnr>[data-card="gallery-video"]{position:relative!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;aspect-ratio:1!important;overflow:hidden!important;border-radius:24px;box-sizing:border-box!important}
       #main .site-19uivnr>[data-card="2"]>div,
       #main .site-19uivnr>[data-card="3"]>div,
       #main .site-19uivnr>[data-card="6"]>div,
@@ -148,7 +148,7 @@
       node.style.setProperty('order', String(rank), 'important');
       node.style.setProperty('grid-row', 'auto', 'important');
       if (node.matches('[data-card]')) {
-        const column = id === '11' ? '1' : id === '10' ? '2' : ['2', '7'].includes(id) ? '1 / -1' : 'auto';
+        const column = id === 'gallery-video' ? '1' : id === '10' ? '2' : ['2', '7'].includes(id) ? '1 / -1' : 'auto';
         node.style.setProperty('grid-column', column, 'important');
       }
     });
