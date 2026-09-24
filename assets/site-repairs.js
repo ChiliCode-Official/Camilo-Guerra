@@ -81,10 +81,10 @@
     }
   });
   const phoneLayout = matchMedia('(max-width:809px)');
-  const mobileSequence = ['0', '1', '5', '8', '9', '4', '7', '2', '3', '6', 'gallery-video', '10'];
+  const mobileSequence = ['0', '5', '8', '9', '1', '4', '7', '2', '3', '10'];
   const mobileMedia = [];
   const grid = document.querySelector('#main .site-19uivnr');
-  [['8', 'video', 'gallery-video']].forEach(([id, selector, mediaId]) => {
+  [].forEach(([id, selector, mediaId]) => {
     const media = grid?.querySelector(`[data-card="${id}"] ${selector}`);
     if (!media) return;
     const placeholder = document.createComment('Original media position');
@@ -133,6 +133,20 @@
       #main .site-19uivnr>[data-card="6"]>div,
       #main .site-19uivnr>[data-card="10"]>div{position:absolute!important;inset:0!important;width:100%!important;max-width:100%!important;height:100%!important;min-height:0!important;transform:none!important}
       #main .site-19uivnr>[data-card="2"]{width:min(76%,280px)!important;max-width:100%!important;justify-self:center!important;height:auto!important;aspect-ratio:1!important;min-height:0!important}
+      #main .site-19uivnr>[data-card="0"] .site-33awz3-container,
+      #main .site-19uivnr>[data-card="5"] .site-4xeowm{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+      #main .site-19uivnr>[data-card="4"] .site-b3untr{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;width:100%!important}
+      #main .site-19uivnr>[data-card="4"] .site-b3untr{position:relative!important;left:2px!important}
+      #main .site-19uivnr>[data-card="4"] .site-b3untr{top:-22px!important}
+      #main .site-19uivnr>[data-card="4"]:focus,
+      #main .site-19uivnr>[data-card="4"]:focus-visible,
+      #main .site-19uivnr>[data-card="4"]>div:focus{outline:none!important;box-shadow:none!important}
+      #main .site-19uivnr>[data-card="4"] .site-b3untr p,
+      #main .site-19uivnr>[data-card="4"] .email-purpose{text-align:center!important;margin-inline:auto!important}
+      #main .site-19uivnr>[data-card="0"]>div>div,
+      #main .site-19uivnr>[data-card="5"]>div>a{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+      #main .site-19uivnr>[data-card="0"] p,
+      #main .site-19uivnr>[data-card="5"] p{text-align:center!important;margin-inline:auto!important}
       #main .site-19uivnr>[data-card="8"]{height:220px!important;min-height:220px!important}
       #main [data-card="8"] .site-sdf25k{inset:auto 16px 16px 16px!important;width:auto!important;align-items:flex-start!important}
       #main [data-card="8"] .site-sdf25k p{text-align:left!important}
@@ -140,11 +154,24 @@
       #main .site-19uivnr>.mobile-media-tile{display:block!important;position:relative!important;height:auto!important;aspect-ratio:1!important;overflow:hidden!important;border-radius:24px}
       #main .site-19uivnr>.mobile-media-tile>div{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;transform:none!important}
       #main .mobile-media-tile .site-1wt9xpr-container{width:100%!important;height:100%!important}
-      #main [data-card="8"] .site-1j083h8{display:none!important}
-      #main .site-19uivnr>.mobile-media-tile>video{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;opacity:1!important;visibility:visible!important;transform:none!important;border-radius:inherit!important;z-index:4!important;pointer-events:auto!important}
+      #main .site-19uivnr>[data-card="6"]{display:none!important}
+      #main [data-card="8"] .site-1j083h8{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;z-index:0!important;border-radius:inherit!important}
+      #main [data-card="8"] .site-1wt9xpr-container,#main [data-card="8"] .site-1wt9xpr-container video{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important}
     }
   `;
   document.head.append(blockStyle);
+  const communityButtonStyle = document.createElement('style');
+  communityButtonStyle.textContent = '#main .native-live-link{box-shadow:none!important;filter:none!important}#main .native-live-link:hover{box-shadow:none!important;filter:none!important}';
+  document.head.append(communityButtonStyle);
+  const socialPreviewStyle = document.createElement('style');
+  socialPreviewStyle.textContent = `
+    #main [data-card="5"]>div>a,
+    #main [data-card="8"]>div>a{background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;isolation:isolate!important}
+    #main [data-card="5"]>div>a{background-image:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.82)),url('assets/5.jpg')!important}
+    #main [data-card="8"]>div>a{background-image:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.82)),url('assets/2.jpg')!important}
+    #main [data-card="5"]>div>a>* ,#main [data-card="8"]>div>a>*{position:relative;z-index:1}
+  `;
+  document.head.append(socialPreviewStyle);
   const videoModalStyle = document.createElement('style');
   videoModalStyle.textContent = `.video-modal{position:fixed!important;inset:0!important;z-index:99999!important;display:grid!important;place-items:center!important;padding:24px!important;background:rgba(0,0,0,.88)!important}.video-modal video{width:min(92vw,900px)!important;height:min(78vh,620px)!important;object-fit:contain!important;background:#000!important;border-radius:16px!important}.video-modal-close{position:fixed!important;top:18px!important;right:18px!important;width:44px!important;height:44px!important;border:1px solid #666!important;border-radius:50%!important;background:#222!important;color:#fff!important;font-size:30px!important;line-height:1!important;cursor:pointer!important}`;
   document.head.append(videoModalStyle);
