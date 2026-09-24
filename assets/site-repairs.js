@@ -1,4 +1,11 @@
 (() => {
+  const profileName = document.querySelector('header .site-1smtx7k h1');
+  if (profileName && !profileName.querySelector('.profile-cars')) {
+    const cars = document.createElement('span');
+    cars.className = 'profile-cars';
+    cars.textContent = ' Cars';
+    profileName.append(cars);
+  }
   const mobileGridStyle = document.createElement('style');
   mobileGridStyle.textContent = `header a::after{content:none!important}@media (max-width:809px){#main .site-19uivnr{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(180px,auto)!important;gap:10px!important;width:100%!important;max-width:540px!important;padding:0 12px!important}#main .site-19uivnr>[data-card]{display:block!important;min-width:0!important;width:auto!important;order:initial!important;grid-column:auto!important;grid-row:auto!important}#main .site-19uivnr>[data-card="1"]{grid-column:1 / -1!important;grid-row:span 2!important}#main .site-19uivnr>[data-card="2"]{grid-column:auto!important;grid-row:auto!important;order:8!important;height:220px!important;aspect-ratio:1!important}#main .site-19uivnr>[data-card="8"]{grid-column:1 / -1!important;order:3!important}#main .site-19uivnr>[data-card="4"]{order:4!important}#main .site-19uivnr>[data-card="3"]{grid-column:1 / -1!important;order:5!important;height:300px!important}#main .site-19uivnr>[data-card="9"]{order:6!important}#main .site-19uivnr>[data-card="6"]{order:7!important}#main .site-19uivnr>[data-card="7"]{order:8!important}#main .site-19uivnr>[data-card="10"]{grid-column:auto!important;order:99!important;aspect-ratio:1!important;height:auto!important}#main .site-19uivnr>[data-card]>div{width:100%!important;min-width:0!important;height:100%!important;min-height:0!important}}`;
   document.head.append(mobileGridStyle);
@@ -74,7 +81,53 @@
     }
   });
   const phoneLayout = matchMedia('(max-width:809px)');
-  const mobileSequence = ['0', '1', '2', '8', '4', '9', '6', '5', '7', '3', '10'];
+  const mobileSequence = ['0', '1', '5', '8', '9', '4', '7', '2', '3', '6', '11', '10'];
+  const mobileMedia = [];
+  const grid = document.querySelector('#main .site-19uivnr');
+  [['8', 'video', '11']].forEach(([id, selector, mediaId]) => {
+    const media = grid?.querySelector(`[data-card="${id}"] ${selector}`);
+    if (!media) return;
+    const placeholder = document.createComment('Original media position');
+    media.before(placeholder);
+    const tile = document.createElement('div');
+    tile.dataset.card = mediaId;
+    tile.className = 'mobile-media-tile';
+    tile.setAttribute('aria-label', 'Video de autos de Camilo Guerra');
+    media.src = 'assets/6.mp4';
+    media.setAttribute('muted', '');
+    media.setAttribute('playsinline', '');
+    media.setAttribute('autoplay', '');
+    media.setAttribute('loop', '');
+    grid.append(tile);
+    mobileMedia.push({ media, placeholder, tile });
+  });
+  const blockStyle = document.createElement('style');
+  blockStyle.textContent = `
+    .mobile-media-tile{display:none!important}
+    .profile-cars{display:block;font-size:.45em;line-height:1.15;letter-spacing:inherit}
+    @media(max-width:809px){
+      #main .site-19uivnr>[data-card="2"],
+      #main .site-19uivnr>[data-card="3"],
+      #main .site-19uivnr>[data-card="6"],
+      #main .site-19uivnr>[data-card="10"],
+      #main .site-19uivnr>[data-card="11"]{position:relative!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;min-height:0!important;aspect-ratio:1!important;overflow:hidden!important;border-radius:24px;box-sizing:border-box!important}
+      #main .site-19uivnr>[data-card="2"]>div,
+      #main .site-19uivnr>[data-card="3"]>div,
+      #main .site-19uivnr>[data-card="6"]>div,
+      #main .site-19uivnr>[data-card="10"]>div{position:absolute!important;inset:0!important;width:100%!important;max-width:100%!important;height:100%!important;min-height:0!important;transform:none!important}
+      #main .site-19uivnr>[data-card="2"]{width:min(76%,280px)!important;max-width:100%!important;justify-self:center!important;height:auto!important;aspect-ratio:1!important;min-height:0!important}
+      #main .site-19uivnr>[data-card="8"]{height:220px!important;min-height:220px!important}
+      #main [data-card="8"] .site-sdf25k{inset:auto 16px 16px 16px!important;width:auto!important;align-items:flex-start!important}
+      #main [data-card="8"] .site-sdf25k p{text-align:left!important}
+      #main [data-card="9"] .site-1oy7h5l{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+      #main .site-19uivnr>.mobile-media-tile{display:block!important;position:relative!important;height:auto!important;aspect-ratio:1!important;overflow:hidden!important;border-radius:24px}
+      #main .site-19uivnr>.mobile-media-tile>div{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;transform:none!important}
+      #main .mobile-media-tile .site-1wt9xpr-container{width:100%!important;height:100%!important}
+      #main [data-card="8"] .site-1j083h8{display:none!important}
+      #main .site-19uivnr>.mobile-media-tile>video{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;opacity:1!important;visibility:visible!important;transform:none!important;border-radius:inherit!important}
+    }
+  `;
+  document.head.append(blockStyle);
   const layoutDefaults = new Map();
   document.querySelectorAll('.site-19uivnr > [data-card]').forEach(card => {
     [card, card.firstElementChild].filter(Boolean).forEach(node => {
@@ -82,6 +135,10 @@
     });
   });
   const arrangePhoneCards = () => {
+    mobileMedia.forEach(({ media, placeholder, tile }) => {
+      if (phoneLayout.matches) tile.append(media);
+      else placeholder.after(media);
+    });
     layoutDefaults.forEach((properties, node) => {
       properties.forEach(([name, value, priority]) => { if (value) node.style.setProperty(name, value, priority); else node.style.removeProperty(name); });
       if (!phoneLayout.matches) return;
@@ -91,7 +148,8 @@
       node.style.setProperty('order', String(rank), 'important');
       node.style.setProperty('grid-row', 'auto', 'important');
       if (node.matches('[data-card]')) {
-        node.style.setProperty('grid-column', ['2', '7', '8'].includes(id) ? '1 / -1' : 'auto', 'important');
+        const column = id === '11' ? '1' : id === '10' ? '2' : ['2', '7'].includes(id) ? '1 / -1' : 'auto';
+        node.style.setProperty('grid-column', column, 'important');
       }
     });
   };
