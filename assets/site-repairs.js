@@ -1,4 +1,79 @@
 (() => {
+  const projectsGrid = document.querySelector('#main .site-19uivnr');
+  if (projectsGrid && !document.getElementById('other-projects')) {
+    const section = document.createElement('section');
+    section.id = 'other-projects';
+    section.setAttribute('aria-labelledby', 'other-projects-title');
+    const heading = document.createElement('h2');
+    heading.id = 'other-projects-title';
+    heading.textContent = 'Mis Otros Proyectos';
+    const cards = document.createElement('div');
+    cards.className = 'other-projects-grid';
+    const projects = [
+      ['Camilo Guerra', '@camiloguerram1 · TikTok', 'https://www.tiktok.com/@camiloguerram1?_r=1&_t=ZS-9A0ntJCXPTJ', 'tiktok'],
+      ['Mexi Parces', '@mexiparces · TikTok', 'https://www.tiktok.com/@mexiparces?_r=1&_t=ZS-9A0nwgHZ2YP', 'tiktok'],
+      ['Facebook', 'Visita mi página', 'https://www.facebook.com/share/19sX9AHAVh/?mibextid=wwXIfr', 'facebook']
+    ];
+    const paths = {
+      tiktok: 'M16 2c.4 2.4 1.8 3.9 4 4.1V10a9 9 0 0 1-4-1.2v7.3a6 6 0 1 1-6-6v3.8a2.3 2.3 0 1 0 2.3 2.3V2Z',
+      facebook: 'M14 22v-9h3l.5-4H14V7c0-1.2.4-2 2-2h2V1.4A26 26 0 0 0 15 1c-3 0-5 1.8-5 5v3H7v4h3v9Z'
+    };
+    projects.forEach(([name, description, url, platform]) => {
+      const link = document.createElement('a');
+      link.className = 'other-project-card';
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', `${name}: ${description} (abre en otra pestaña)`);
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('viewBox', '0 0 24 24');
+      icon.setAttribute('aria-hidden', 'true');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', paths[platform]);
+      icon.append(path);
+      const arrow = document.createElement('span');
+      arrow.className = 'other-project-arrow';
+      arrow.textContent = '↗';
+      arrow.setAttribute('aria-hidden', 'true');
+      const text = document.createElement('div');
+      const title = document.createElement('strong');
+      title.textContent = name;
+      const subtitle = document.createElement('span');
+      subtitle.textContent = description;
+      text.append(title, subtitle);
+      link.append(icon, arrow, text);
+      cards.append(link);
+    });
+    const gallery = document.createElement('div');
+    gallery.className = 'other-projects-gallery';
+    ['2', '3', '10'].forEach(id => {
+      const photo = projectsGrid.querySelector(`:scope > [data-card="${id}"]`);
+      if (photo) gallery.append(photo);
+    });
+    section.append(heading, gallery, cards);
+    projectsGrid.after(section);
+    const style = document.createElement('style');
+    style.textContent = `
+      #other-projects{box-sizing:border-box;width:100%;max-width:848px;margin:28px auto 0;padding:0 12px;font-family:Inter,system-ui,sans-serif;color:var(--token-a95b4afe-3104-4deb-93d5-5885d2a8dad1,#eee)}
+      #other-projects h2{font:600 20px/1.3 inherit;font-size:20px;line-height:1.3;letter-spacing:-.03em;margin:0 0 16px}
+      .other-projects-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+      #other-projects .other-projects-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}
+      #other-projects .other-projects-gallery>[data-card]{display:block!important;position:relative!important;width:100%!important;min-width:0!important;height:auto!important;aspect-ratio:1!important;order:initial!important;grid-column:auto!important;grid-row:auto!important;overflow:hidden!important;border-radius:24px}
+      #other-projects .other-projects-gallery>[data-card]>div{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-width:none!important;transform:none!important}
+      #other-projects .other-projects-gallery>[data-card]>div>a{width:100%!important;height:100%!important;box-sizing:border-box!important}
+      @media(max-width:809px){#other-projects .other-projects-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}#other-projects .other-projects-gallery>[data-card="2"]{grid-column:1 / -1!important;width:min(76%,280px)!important;justify-self:center!important}}
+      #other-projects .other-project-card{box-sizing:border-box;position:relative;display:flex;flex-direction:column;justify-content:space-between;min-width:0;min-height:170px;padding:18px;border-radius:24px;border:1px solid #8882;background:var(--token-a1bbbd6e-47db-4a4a-9287-1fde5982623f,#171717);color:inherit;text-decoration:none;transition:transform .2s ease,border-color .2s ease}
+      .other-project-card svg{width:24px;height:24px;fill:currentColor}
+      .other-project-arrow{position:absolute;top:16px;right:18px;color:#8c8c8c;font-size:23px}
+      .other-project-card strong{display:block;font-size:15px;font-weight:500;line-height:1.4}
+      .other-project-card div>span{display:block;margin-top:4px;font-size:12px;line-height:1.5;color:#8c8c8c;overflow-wrap:anywhere}
+      #other-projects a:focus-visible{outline:2px solid #8bb9fe;outline-offset:4px}
+      @media(hover:hover){#other-projects a:hover{transform:translateY(-3px);border-color:#8886}}
+      @media(max-width:809px){#other-projects{max-width:540px}.other-projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.other-project-card:last-child{grid-column:1 / -1}#other-projects .other-project-card:last-child{min-height:130px}}
+      @media(prefers-reduced-motion:reduce){#other-projects a{transition:none}}
+    `;
+    document.head.append(style);
+  }
   const profileName = document.querySelector('header .site-1smtx7k h1');
   if (profileName && !profileName.querySelector('.profile-cars')) {
     const cars = document.createElement('span');
