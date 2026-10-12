@@ -1,5 +1,84 @@
 import createGlobe from './cobe.js';
 
+document.querySelectorAll('.chilicode-footer').forEach(footer => {
+  const link = footer.querySelector('a');
+  if (!link) return;
+  link.href = 'https://chilicode-official.github.io/Rodric-GT3/';
+  link.setAttribute('aria-label', 'Desarrollado por RodricGT3');
+  const title = footer.querySelector('strong');
+  if (title) title.textContent = 'Desarrollado por RodricGT3';
+  const description = footer.querySelector('small');
+  if (description) description.textContent = 'Diseño y desarrollo web para proyectos con identidad.';
+  const logo = footer.querySelector('img');
+  if (logo) logo.alt = '';
+});
+
+// Animaciones de texto nativas: mantienen el sitio ligero y funcionan en GitHub Pages.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const animateTextChars = (element, mode = 'split') => {
+  if (!element || element.dataset.textAnimated) return;
+  const value = element.textContent.trim();
+  if (!value) return;
+  element.dataset.textAnimated = 'true';
+  element.setAttribute('aria-label', value);
+  element.textContent = '';
+  const wrapper = document.createElement('span');
+  wrapper.className = mode === 'fold' ? 'native-fold' : 'native-text-chars';
+  [...value].forEach((character, index) => {
+    const span = document.createElement('span');
+    span.className = mode === 'fold' ? 'native-fold-char' : 'native-text-char';
+    span.textContent = character === ' ' ? '\u00a0' : character;
+    span.style.animationDelay = `${index * 45}ms`;
+    wrapper.append(span);
+  });
+  element.append(wrapper);
+  if (reduceMotion) wrapper.classList.add('is-visible');
+  else requestAnimationFrame(() => wrapper.classList.add('is-visible'));
+};
+
+const addTypingEffect = element => {
+  if (!element || element.dataset.typingAnimated) return;
+  const messages = ['Creador de contenido de autos, Fórmula 1 y spotting.', 'Siempre buscando el próximo gran coche.', 'Historias, carreras y cultura automotriz.'];
+  element.dataset.typingAnimated = 'true';
+  element.classList.add('native-type-text');
+  const cursor = document.createElement('span');
+  cursor.className = 'native-type-cursor';
+  cursor.textContent = '|';
+  let message = 0;
+  let position = 0;
+  let deleting = false;
+  const tick = () => {
+    const current = messages[message];
+    element.textContent = current.slice(0, position);
+    element.append(cursor);
+    if (reduceMotion) return;
+    if (!deleting && position < current.length) position += 1;
+    else if (!deleting) { deleting = true; setTimeout(tick, 1500); return; }
+    else if (position > 0) position -= 1;
+    else { deleting = false; message = (message + 1) % messages.length; }
+    setTimeout(tick, deleting ? 28 : 55);
+  };
+  tick();
+};
+
+const bio = document.querySelector('[data-card="0"] .site-1iorxa3 p');
+if (bio) addTypingEffect(bio);
+animateTextChars(document.querySelector('header h1'), 'fold');
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('[data-card] .site-wrpmw1, [data-card] .site-1iorxa3').forEach(element => {
+  element.classList.add('native-blur-reveal');
+  if (reduceMotion) element.classList.add('is-visible');
+  else revealObserver.observe(element);
+});
+
 // La exportación original dejó dos copias completas del sitio; conserva solo la primera.
 document.querySelectorAll('[data-site-root]').forEach((node,index)=>{if(index>0)node.remove()});
 

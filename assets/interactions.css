@@ -75,3 +75,29 @@ html{scroll-behavior:smooth}body{overflow-x:hidden}.smooth-reveal{opacity:0;tran
 .site-o1iydx-container .clipboard-container{position:absolute!important;top:12px!important;right:12px!important;width:40px!important;height:40px!important;display:grid!important;place-items:center!important;overflow:visible!important}.site-o1iydx-container .clipboard-container input{display:none!important}.site-o1iydx-container .clipboard-container svg{width:20px!important;height:20px!important;position:static!important;transform:none!important}
 .site-8w4xde a[href*="tiktok.com"],.site-8w4xde a[href*="instagram.com"],.site-8w4xde a[href*="youtube.com"]{position:relative!important}.site-8w4xde a[href*="tiktok.com"]::after{content:"TikTok"}.site-8w4xde a[href*="instagram.com"]::after{content:"Instagram"}.site-8w4xde a[href*="youtube.com"]::after{content:"YouTube"}.site-8w4xde a::after{position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);font:500 10px/1 Inter,Arial,sans-serif;color:#8c8c8c;white-space:nowrap;pointer-events:none}
 .native-social-label{position:absolute!important;top:calc(100% + 5px)!important;left:50%!important;transform:translateX(-50%)!important;font:500 10px/1 Inter,Arial,sans-serif!important;color:#8c8c8c!important;white-space:nowrap!important;pointer-events:none!important}
+.chilicode-footer img{display:none!important}
+.chilicode-footer a::before{content:'✦';display:grid;place-items:center;width:42px;height:42px;border:1px solid #8b5cf6;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;font-size:22px;box-shadow:0 0 18px #8b5cf666}
+
+/* Microinteracciones de texto, sin librerías externas. */
+.native-type-text{min-height:1.25em}
+.native-text-char{display:inline-block;opacity:0;transform:translateY(22px);will-change:transform,opacity}
+.native-text-chars.is-visible .native-text-char{animation:native-char-in .6s cubic-bezier(.22,.61,.36,1) forwards}
+.native-fold-char{display:inline-block;opacity:0;transform:perspective(700px) rotateX(-88deg);transform-origin:top center;will-change:transform,opacity}
+.native-fold.is-visible .native-fold-char{animation:native-fold-in .65s cubic-bezier(.22,.61,.36,1) forwards}
+.native-blur-reveal{opacity:0;filter:blur(10px);transform:translateY(14px);transition:opacity .7s ease,filter .7s ease,transform .7s ease}
+.native-blur-reveal.is-visible{opacity:1;filter:blur(0);transform:none}
+.native-type-cursor{display:inline-block;margin-left:2px;color:#ff315c;animation:native-cursor-blink 1s steps(1,end) infinite}
+@keyframes native-char-in{to{opacity:1;transform:none}}
+@keyframes native-fold-in{to{opacity:1;transform:perspective(700px) rotateX(0)}}
+@keyframes native-cursor-blink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.native-text-char,.native-fold-char,.native-blur-reveal{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}.native-type-cursor{animation:none}}
+
+/* YouTube: el video ocupa toda la tarjeta y no deja visible la imagen de fondo. */
+#main [data-card="8"] > div,
+#main [data-card="8"] > div > a{position:relative!important;overflow:hidden!important}
+#main [data-card="8"] .site-1j083h8{position:absolute!important;inset:0!important;z-index:1!important;border-radius:inherit!important;box-shadow:none!important}
+#main [data-card="8"] .site-1wt9xpr-container,
+#main [data-card="8"] .site-1wt9xpr-container video{display:block!important;width:100%!important;height:100%!important}
+#main [data-card="8"] .site-1wt9xpr-container video{object-fit:cover!important;object-position:center!important}
+#main [data-card="8"] .site-vlfe5l,
+#main [data-card="8"] .site-sdf25k{position:relative!important;z-index:2!important;pointer-events:none!important}
