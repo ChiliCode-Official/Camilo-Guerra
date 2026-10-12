@@ -13,6 +13,34 @@ document.querySelectorAll('.chilicode-footer').forEach(footer => {
   if (logo) logo.alt = '';
 });
 
+window.addEventListener('DOMContentLoaded', () => {
+  // Limpia cualquier texto heredado de la plantilla, incluido el pie duplicado.
+  document.querySelectorAll('.chilicode-footer, [class*="chili" i], [id*="chili" i]').forEach(node => {
+    node.querySelectorAll('strong, small, span, p, a, img').forEach(child => {
+      if (/chili ?code/i.test(child.textContent || '') || /chili ?code/i.test(child.getAttribute('alt') || '')) {
+        if (child.matches('strong')) child.textContent = 'Desarrollado por RodricGT3';
+        else if (child.matches('small')) child.textContent = 'Diseño y desarrollo web para proyectos con identidad.';
+        else if (child.matches('img')) child.removeAttribute('alt');
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-card] > div').forEach((card, index) => {
+    if (card.dataset.cubeReveal) return;
+    card.dataset.cubeReveal = 'true';
+    card.classList.add('native-cube-reveal');
+    card.style.transitionDelay = `${Math.min(index * 45, 360)}ms`;
+    if (reduceMotion) card.classList.add('is-visible');
+    else revealObserver.observe(card);
+  });
+
+  // Reintenta los efectos de texto cuando la plantilla terminó de insertar su contenido.
+  const intro = document.querySelector('[data-card="0"] p');
+  if (intro && !intro.dataset.typingAnimated) addTypingEffect(intro);
+  const title = document.querySelector('header h1, header [data-site-name="Name"] h1');
+  if (title && !title.dataset.textAnimated) animateTextChars(title, 'fold');
+});
+
 // Animaciones de texto nativas: mantienen el sitio ligero y funcionan en GitHub Pages.
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const animateTextChars = (element, mode = 'split') => {
